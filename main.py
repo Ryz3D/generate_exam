@@ -184,7 +184,7 @@ def handle_cli(args=sys.argv, out_fn=print, in_fn=input):
     if flag_c:
         quitters = ["q", "quit", "exit", "quit()", "exit()"]
         out_fn(
-            """to quit use "{}"
+            """to quit use Ctrl+C or "{}"
 to clear screen and vars use "clear"
 """.format(
                 '", "'.join(quitters)
@@ -198,7 +198,14 @@ to clear screen and vars use "clear"
                 return
             if i in quitters:
                 return
-            out_fn(handle_calc_in(i, v))
+            elif i == "clear":
+                v = {}
+                if sys.platform == "win32":
+                    os.system("cls")
+                else:
+                    os.system("clear")
+            else:
+                out_fn(handle_calc_in(i, v))
 
     queue = []
     if flag_a:

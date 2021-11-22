@@ -4,11 +4,13 @@ import subprocess
 
 
 def convert_pdf(path, debug_level=1, out_fn=print):
-    cmd = 'pdflatex -aux-directory=aux_files {}-interaction nonstopmode "{}"'.format(
-        "-quiet " if debug_level < 3 else "", path
+    args = (
+        'pdflatex --output-directory=aux_files {}-interaction nonstopmode "{}"'.format(
+            "-quiet " if debug_level < 3 else "", path
+        )
     )
 
-    proc = subprocess.Popen(cmd, cwd="files", stdout=subprocess.PIPE)
+    proc = subprocess.Popen(args.split(" "), cwd="files", stdout=subprocess.PIPE)
     comm = proc.communicate()
     if comm[1]:
         out_fn("ERROR: " + comm[1].decode("utf-8"))

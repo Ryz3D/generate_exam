@@ -1,136 +1,121 @@
 <xml version="1.0">
     <excercise>
-        <title>Aufgabe 2 - Spule mit Selbst- und Gegeninduktivität</title>
+        <title>Beispielaufgabe - Thema Zusammenhangslosigkeit</title>
         <variables>
-            mu0 = 0.000001256; mur = 2000; ri = 10; ra = 16; N1 = 150; N2 = 200;
-            Aq = ((ra - ri) / 2)^2 * pi;
-            l = (ra + ri) / 2 * 2 * pi;
-            Rm = l / (mu0 * mur * Aq);
-            L1 = N1^2 / Rm;
-            L2 = N2^2 / Rm;
-            M = (N1 + N2)^2 / Rm;
+            l_m = 3; d_mm = 1; kCu = 58;
+            A_mm2 = pi * (d_mm / 2)^2; R = l_m / (A_mm2 * kCu);
+            dxa = 0.0005; dxr = dxa / l_m; dxp = dxr * 100;
+            Uq = 1; I = Uq / R;
         </variables>
         <intro>
             <picture>
-                <src>coil_core</src>
-                <caption>Quelle: Reichelt</caption>
+                <src>ryz</src>
+                <caption>Symbolbild</caption>
             </picture>
             <p>
-                Ein Ring aus Ferrit (Annahme: $\mu_r =
-                <var>mur</var>
-                $) mit kreisförmigem Querschnitt besitzt einen inneren Radius von $r_i =
-                <var>ri</var>
-                $mm und einen äußeren Radius von $r_a =
-                <var>ra</var>
-                $mm. Auf dem Ring sind zwei Wicklungen mit $N_1 =
-                <var>N1</var>
-                $ und $N_2 =
-                <var>N2</var>
-                $ Windungen mit gleichem Wicklungssinn angebracht.
+                Hier gehört eine Übersicht der Aufgabe hin, falls vorhanden. Die folgenden Aufgaben sind Beispiele was mit diesem Programm möglich ist. Werden Werte in der Vorlage geändert, werden diese automatisch im Text (z.B.: $l=
+                <var>l_m</var>
+                $m) sowie in den Rechnungen (z.B.: $A=
+                <var>A_mm2</var>
+                mm^2$) und Lösungen übernommen.
             </p>
-            <p>Gehen Sie von einem homogenen Feld im Inneren des Querschnitts aus. Streufelder sind zu vernachlässigen.</p>
         </intro>
         <question>
-            <id>calc_geometry</id>
-            <depends></depends>
+            <id>calc_resistance</id>
             <points>4</points>
             <task>
-                <p>Berechnen Sie die Querschnittsfläche $A_q$ des Rings sowie die mittlere Feldlinienlänge $l$.</p>
+                <p>
+                    Berechnen Sie den Widerstand $R$ eines runden Kupferleiters mit der Leitfähigkeit $\kappa_{Cu}=
+                    <var>kCu</var>
+                    \frac{\text{m}}{\Omega\text{mm}^2}$, der Länge $l =
+                    <var>l_m</var>
+                    $m und dem Durchmesser $d =
+                    <var>d_mm</var>
+                    $mm.
+                </p>
             </task>
             <solution>
                 <p>
-                    $A_q = (\frac{r_a - r_i}{2})^2 * \pi = (\frac{
-                    <var>ra</var>
-                    \text{mm}-
-                    <var>ri</var>
-                    \text{mm}}{2})^2 *
+                    $
+                    A=\pi*(\frac{d}{2})^2=
                     <var>pi</var>
-                    =
-                    <var>Aq</var>
-                    $mm\textsuperscript{2}
+                    *(\frac{
+                    <var>d_mm</var>
+                    \text{mm}}{2})^2=
+                    <var>A_mm2</var>
+                    \text{mm}^2
+                    $
                 </p>
                 <p>
-                    $l = \frac{r_a + r_i}{2} * 2 * \pi = \frac{
-                    <var>ra</var>
-                    \text{mm}+
-                    <var>ri</var>
-                    \text{mm}}{2} * 2 *
-                    <var>pi</var>
-                    =
-                    <var>l</var>
-                    $mm
+                    $
+                    R=\frac{l}{A*\kappa_{Cu}}=\frac{
+                    <var>l_m</var>
+                    \text{m}}{
+                    <var>A_mm2</var>
+                    \text{mm}^2*
+                    <var>kCu</var>
+                    \frac{\text{m}}{\Omega\text{mm}^2}}=\underline{\underline{
+                    <var>R</var>
+                    \Omega}}
+                    $
                 </p>
             </solution>
         </question>
         <question>
-            <id>calc_magnresistance</id>
-            <depends>calc_geometry</depends>
+            <id>calc_variation</id>
             <points>2</points>
             <task>
-                <p>Wie groß ist der magnetische Widerstand $R_m$ der Anordnung?</p>
+                <p>
+                    Die Länge $l=
+                    <var>l_m</var>
+                    $m wurde mit einem Lineal mit Millimeterskala gemessen. Wie lautet die absolute Messunsicherheit $\Delta x_a$ und die relative Messunsicherheit $\Delta x_r$?
+                </p>
             </task>
             <solution>
                 <p>
-                    $R_m = \frac{l}{\mu_0 * \mu_r * A_q} = \frac{
-                    <var>l</var>
-                    \text{mm}}{
-                    <var>mu0</var>
-                    \frac{\text{N}}{\text{A\textsuperscript{2}}} *
-                    <var>mur</var>
-                    *
-                    <var>Aq</var>
-                    \text{mm\textsuperscript{2}}} =
-                    <var>Rm</var>
-                    $\textOmega
+                    Absolute Messunsicherheit entspricht einem halben Skalenteil:
+                </p>
+                <p>
+                    $
+                    \Delta x_a=\frac{1\text{mm}}{2}=\underline{\underline{0.0005\text{m}}}
+                    $
+                </p>
+                <p>
+                    $
+                    \Delta x_r=\frac{\Delta x_a}{l}=\frac{
+                    <var>dxa</var>
+                    \text{m}}{
+                    <var>l_m</var>
+                    \text{m}}=
+                    <var>dxr</var>
+                    \ \hat{=}\ \underline{\underline{
+                    <var>dxp</var>
+                    \%}}$
                 </p>
             </solution>
         </question>
         <question>
-            <id>calc_inductivity</id>
-            <depends>calc_magnresistance</depends>
+            <id>calc_amps</id>
+            <depends>calc_resistance</depends>
             <points>3</points>
             <task>
-                <p>Wie groß sind die Induktivitäten $L_1$ und $L_2$ der Wicklungen?</p>
+                <p>
+                    An den Kupferleiter wird eine ideale Spannungsquelle mit $U_q=
+                    <var>Uq</var>
+                    $V angeschlossen. Bestimmen Sie den Strom, der durch den Leiter fließt.
+                </p>
             </task>
             <solution>
                 <p>
-                    $L_1 = \frac{N_1^2}{R_m} = \frac{
-                    <var>N1</var>
-                    ^2}{
-                    <var>Rm</var>
-                    \Omega} =
-                    <var>L1</var>
-                    $H
-                </p>
-                <p>
-                    $L_2 = \frac{N_2^2}{R_m} = \frac{
-                    <var>N2</var>
-                    ^2}{
-                    <var>Rm</var>
-                    \Omega} =
-                    <var>L2</var>
-                    $H
-                </p>
-            </solution>
-        </question>
-        <question>
-            <id>calc_coupling</id>
-            <depends>calc_magnresistance</depends>
-            <points>5</points>
-            <task>
-                <p>Wie groß ist die Gegeninduktivität $M$?</p>
-            </task>
-            <solution>
-                <p>
-                    $M = \frac{(N_1 + N_2)^2}{R_m} = \frac{(
-                    <var>N1</var>
-                    +
-                    <var>N2</var>
-                    )^2}{
-                    <var>Rm</var>
-                    \Omega} =
-                    <var>M</var>
-                    $H
+                    $
+                    I=\frac{U_q}{R}=\frac{
+                    <var>Uq</var>
+                    \text{V}}{
+                    <var>R</var>
+                    \Omega}=\underline{\underline{
+                    <var>I</var>
+                    \text{A}}}
+                    $
                 </p>
             </solution>
         </question>

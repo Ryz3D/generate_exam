@@ -1,8 +1,17 @@
-"""this module converts parsed .xml to .tex"""
+"""this module converts the parsed template to .tex"""
 
 import math, py.exml, py.esolve
 
-lt_packages = ["wrapfig", "graphicx", "textgreek", "amsmath", "caption", "geometry", "fancyhdr", "lastpage"]
+lt_packages = [
+    "wrapfig",
+    "graphicx",
+    "textgreek",
+    "amsmath",
+    "caption",
+    "geometry",
+    "fancyhdr",
+    "lastpage",
+]
 lt_linebreak = "\\\\"
 lt_smallspace = "\\hfill \\break"
 lt_bigspace = "\\vspace{15mm}"
@@ -10,10 +19,13 @@ lt_bigspace = "\\vspace{15mm}"
 
 def calc_vars(text):
     vars = {"pi": math.pi, "e": math.e}
-    equations = map(lambda t: t.strip(), text.split(";"))
-    equations = filter(None, equations)
-    for e in equations:
-        vars[e.split("=")[0].strip()] = py.esolve.eval(e.split("=")[1].strip(), vars)
+    if text.strip() != "":
+        equations = map(lambda t: t.strip(), text.split(";"))
+        equations = filter(None, equations)
+        for e in equations:
+            vars[e.split("=")[0].strip()] = py.esolve.eval(
+                e.split("=")[1].strip(), vars
+            )
     return vars
 
 
@@ -68,8 +80,18 @@ def resolve_all(field, vars, ignore_nl=False, sep=""):
 
 def generate_tex(data, solution=False, debug_level=1, out_fn=print):
     ex = py.exml.get_field(py.exml.get_field(data, "xml"), "excercise")
-    vars = calc_vars(py.exml.get_field(ex, "variables"))
-    intro = resolve_all(py.exml.get_field(ex, "intro"), vars)
+
+    vars = calc_vars("")
+    try:
+        vars = calc_vars(py.exml.get_field(ex, "variables"))
+    except KeyError:
+        pass
+
+    intro = ""
+    try:
+        intro = resolve_all(py.exml.get_field(ex, "intro"), vars)
+    except KeyError:
+        pass
 
     tex_data = {
         "lt_packages": "\n".join(
@@ -100,7 +122,9 @@ def generate_tex(data, solution=False, debug_level=1, out_fn=print):
                 dependencies[dep_i] = q_ids.index(dependencies[dep_i])
             except KeyError:
                 raise KeyError(
-                    "ERROR: egen: could not find dependency '{}'".format(dependencies[dep_i])
+                    "ERROR: egen: could not find dependency '{}'".format(
+                        dependencies[dep_i]
+                    )
                 )
         dep_str = ""
         if len(dependencies) > 0:
@@ -116,7 +140,7 @@ def generate_tex(data, solution=False, debug_level=1, out_fn=print):
             sol_lines = len(solution_field)
         except KeyError:
             pass
-        
+
         q_points = int(py.exml.get_field(ques, "points"))
         tex_data["points_sum"] += q_points
         tex_data[
@@ -139,7 +163,11 @@ def generate_tex(data, solution=False, debug_level=1, out_fn=print):
         )
 
     if debug_level > 2:
-        out_fn("DEBUG: generated {} questions{}, completing .tex".format(len(questions), " and solutions" if solution else ""))
+        out_fn(
+            "DEBUG: generated {} questions{}, completing .tex".format(
+                len(questions), " and solutions" if solution else ""
+            )
+        )
 
     return """\\documentclass{{article}}
 {lt_packages}
@@ -155,6 +183,9 @@ def generate_tex(data, solution=False, debug_level=1, out_fn=print):
 \\fancyhead[RE,LO]{{Name:}}
 \\fancyfoot[RE,LO]{{Gesamtpunktzahl: {points_sum}P}}
 \\fancyfoot[LE,RO]{{Seite \\thepage/\\pageref{{LastPage}}}}
+
+\\newcommand\\floor[1]{{\\lfloor#1\\rfloor}}
+\\newcommand\\ceil[1]{{\\lceil#1\\rceil}}
 
 \\graphicspath{{ {{./pictures/}} }}
 
