@@ -1,10 +1,14 @@
-## Generiert Aufgabenblätter aus Vorlagen
+# Aufgabengenerator
 
-![Beispiel für Lösungsblatt](https://raw.githubusercontent.com/Ryz3D/generate_exam/master/docs/example1.png)
-![Beispiel für Aufgabenblatt](https://raw.githubusercontent.com/Ryz3D/generate_exam/master/docs/example2.png)
-![Beispiel für Vorlage](https://raw.githubusercontent.com/Ryz3D/generate_exam/master/docs/example.png)
+| Aufgaben | Lösungen |
+| --- | --- |
+| ![Beispiel für Lösungsblatt](/docs/example1.png) | ![Beispiel für Aufgabenblatt](/docs/example2.png) |
 
-Features:
+### Vorlagen:
+
+![Beispiel für Vorlage](/docs/example.png)
+
+## Features
   - Volle LaTeX-Unterstützung
   - Automatisches Einsetzen von gegebenen Werten an allen Stellen des Texts
   - Ausrechnen von Lösungen durch vorgegebene Formeln
@@ -12,12 +16,12 @@ Features:
   - Gesamtpunktzahl berechnet
   - Abhängigkeiten von anderen Aufgabenteilen als Notiz
 
-Dependencies:
-  - Python 3 (Getestet auf 3.9.0 und 3.7.3)
-  - MikTex oder LiveTex, um pdflatex zu nutzen
+## Dependencies
+  - [Python 3](https://www.python.org/downloads/) (Getestet auf 3.9.0 und 3.7.3)
+  - [MikTex](https://miktex.org/download) oder [LiveTex](https://www.tug.org/texlive/acquire-netinstall.html), um pdflatex zu nutzen
     - Für LiveTex müssen standardmäßig folgende LaTeX-Pakete intalliert werden (Mit MikTex automatisch): wrapfig, graphicx, textgreek, amsmath, caption, geometry, fancyhdr, lastpage
 
-Nutzung:
+## Konsolennutzung
 ```
 python main.py (OPTIONEN) [DATEI]
 
