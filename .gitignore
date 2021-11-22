@@ -1,3 +1,4 @@
-files/aux_files
 /generate_exam.pdf
-*.pyc
+
+files/aux_files
+py/__pycache__
