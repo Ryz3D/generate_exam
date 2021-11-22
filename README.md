@@ -17,8 +17,8 @@
   - Abhängigkeiten von anderen Aufgabenteilen als Notiz
 
 ## Dependencies
-  - Python 3 (Getestet auf 3.9.0 und 3.7.3)
-  - MikTex oder LiveTex, um pdflatex zu nutzen
+  - [Python 3](https://www.python.org/downloads/) (Getestet auf 3.9.0 und 3.7.3)
+  - [MikTex](https://miktex.org/download) oder [LiveTex](https://www.tug.org/texlive/acquire-netinstall.html), um pdflatex zu nutzen
     - Für LiveTex müssen standardmäßig folgende LaTeX-Pakete intalliert werden (Mit MikTex automatisch): wrapfig, graphicx, textgreek, amsmath, caption, geometry, fancyhdr, lastpage
 
 ## Konsolennutzung
