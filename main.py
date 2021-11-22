@@ -1,10 +1,8 @@
 """main module"""
 
+# https://github.com/Ryz3D/generate_exam
+
 """
-dependencies:
-    - Python 3 (https://www.python.org/downloads/)
-    - MiKTeX (https://miktex.org/download)
-        -> pdflatex.exe in %PATH%
 standard libraries:
     - sys
     - math
