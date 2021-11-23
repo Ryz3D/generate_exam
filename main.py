@@ -8,6 +8,7 @@ standard libraries:
     - math
     - re
     - subprocess
+    - decimal
 
 known bugs:
     - updates total page count on second run

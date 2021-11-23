@@ -1,6 +1,6 @@
 """this module solves simple mathematical expressions"""
 
-import math
+import math, decimal
 
 pretty_digits = 6  # i.e. 1.23456
 scientific_upper = 3  # min. 1e+4
@@ -8,6 +8,7 @@ scientific_lower = -3  # max. 9.99e-4
 round_margin = 0.00001  # 0.001%
 max_steps = 20
 ops = ["+", "*", "^", "-", "/"]
+dctx = decimal.Context(prec=20)
 
 
 def prettyfloat(f, try_str=False):
@@ -37,12 +38,21 @@ def prettyfloat(f, try_str=False):
         return signif_str
 
 
+# full precision and no scientific notation
+def ftos(f):
+    return format(dctx.create_decimal(repr(f)), "f")
+
+
 def eval_num(num, vars):
+    if num == "":
+        raise KeyError("ERROR: esolve: missing number")
     try:
         return float(num)
     except ValueError:
         if num in vars:
             return float(vars[num])
+        elif str(num)[0] == "-" and num[1:] in vars:
+            return -float(vars[num[1:]])
         else:
             raise KeyError("ERROR: esolve: var {} not defined".format(num))
 
@@ -114,17 +124,17 @@ def eval_rec(exp, vars):
         b0 = eval_num(blocks[0], vars)
         b1 = eval_num(blocks[1], vars)
         if operators[0][1] == "+":
-            return str(b0 + b1)
+            return ftos(b0 + b1)
         if operators[0][1] == "-":
-            return str(b0 - b1)
+            return ftos(b0 - b1)
         if operators[0][1] == "*":
-            return str(b0 * b1)
+            return ftos(b0 * b1)
         if operators[0][1] == "/":
-            return str(b0 / b1)
+            return ftos(b0 / b1)
         if operators[0][1] == "^":
-            return str(math.pow(b0, b1))
+            return ftos(math.pow(b0, b1))
     elif len(operators) == 0:
-        return str(eval_num(blocks[0], vars))
+        return ftos(eval_num(blocks[0], vars))
 
     return "NaN"
 
