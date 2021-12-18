@@ -1,0 +1,43 @@
+<xml>
+    <settings>
+decimal_separator = ","
+    </settings>
+
+    <variables>
+pi = 3.14159265
+mu_0 = 1.25663706 * 10 ** -6
+
+fach = "MND"
+semester = "WS 2021"
+    </variables>
+
+    <latex>
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{textgreek}
+
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE,LO]{Name:}
+\fancyfoot[RE,LO]{Gesamtpunktzahl: {{ POINTS_TOTAL }}P}
+\fancyfoot[LE,RO]{Seite \thepage/\pageref{LastPage}}
+
+\begin{document}
+
+Fachbereich {{ fach }} / {{ semester }}
+
+{{ task("coil1") }}
+
+\end{document}
+    </latex>
+</xml>

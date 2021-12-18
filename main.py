@@ -4,6 +4,7 @@
 
 """
 standard libraries:
+	- os
     - sys
     - math
     - re

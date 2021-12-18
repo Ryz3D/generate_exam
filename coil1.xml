@@ -1,0 +1,51 @@
+<xml>
+    <settings>
+# hier könnten globale und standard einstellungen überschrieben werden
+    </settings>
+
+    <variables>
+# geg.
+N = rand(100, 200, 10)      # Windungszahl zwischen 100 und 200 in 10er-Schritten
+r = 0.02                    # Konstanter Radius 2cm
+l = rand(0.1, 0.2, 0.01)    # Länge zwischen 10cm und 20cm in 1cm-Schritten
+
+# ges.
+# 1
+A = 2 * pi * r ^ 2          # Querschnittsfläche
+L = N ^ 2 * mu_0 * A / l    # Induktivität
+
+# 2
+R_m = l / (mu_0 * A)        #
+    </variables>
+
+    <latex>
+\part*{Test 1 - Elektromagnetismus {{ TASK_POINTS }}}
+
+Die folgenden Aufgaben behandeln eine Luftspule mit der Windungszahl {{ geg("N") }}, dem Radius {{ geg("r") }}m und der Länge {{ geg("l") }}.
+
+{{ subtasks }}
+    </latex>
+
+    <subtask>
+        <points>3</points>
+        <latex>
+\subsection*{Berechnen Sie die Induktivität der Spule ({{ points }}P)}
+
+\begin{gather}
+{{ sol("A") }} \\
+{{ sol("L") }}
+\end{gather}
+        </latex>
+    </subtask>
+
+    <subtask>
+        <points>4</points>
+        <latex>
+\subsection*{Bestimmen Sie den magnetischen Widerstand {{ ges("R_m") }} der Spule ({{ points }}P)}
+
+\begin{gather}
+{{ sol("R_m") }}
+\end{gather}
+        </latex>
+    </subtask>
+</xml>
