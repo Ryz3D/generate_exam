@@ -1,5 +1,7 @@
 # Aufgabengenerator
 
+# Diese Version ist veraltet. [Der hier](https://github.com/Ryz3D/generate_exam2) ist neuer und besser.
+
 | Aufgaben | Lösungen |
 | --- | --- |
 | ![Beispiel für Lösungsblatt](/docs/example1.png) | ![Beispiel für Aufgabenblatt](/docs/example2.png) |
